@@ -78,18 +78,17 @@ class DBStorage:
     def get(self, cls, id):
         """get: retrieve an object from the file storage about class ad id"""
 
-        if cls in classes.values() and id and type(id) == str:
-            d_obj = self.all(cls)
-            for key, value in d_obj.items():
-                if key.split(".")[1] == id:
-                    return value
-        return None
+        if cls and id:
+            tempo = cls, __name__ + "." + id
+            count = self.all(cls)
+            for key in count:
+                if key == tempo:
+                    return count[key]
+        else:
+            return None
 
     def count(self, cls=None):
         """count: 
         count the number of objects in storage matching"""
 
-        data = self.all(cls)
-        if cls in classes.values():
-            data = self.all(cls)
-        return len(data)
+        return (len(self.all(cls)))
