@@ -16,9 +16,9 @@ def returnstuff():
 @app_views.route('/stats', strict_slashes=False)
 def stuff():
     '''JSON Responses'''
-    todos = {'states': State, 'users': User,
-            'amenities': Amenity, 'cities': City,
+    todos = {'states': State, 'users': User,'amenities': Amenity, 'cities': City,
             'places': Place, 'reviews': Review}
+    
     for key in todos:
         todos[key] = storage.count(todos[key])
     return jsonify(todos)
