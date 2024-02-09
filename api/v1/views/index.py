@@ -1,8 +1,6 @@
 #!/usr/bin/python3xx
 '''api status'''
-import models
 from models import storage
-from models.base_model import BaseModel
 from flask import jsonify
 from api.v1.views import app_views
 
@@ -13,7 +11,7 @@ def returnstuff():
     return jsonify(status='OK')
 
 
-@app_views.route('/stats', strict_slashes=False)
+@app_views.route('/stats', methods=['GET'])
 def stuff():
     '''JSON Responses'''
     todos = {'states': State, 'users': User,
@@ -22,3 +20,7 @@ def stuff():
     for key in todos:
         todos[key] = storage.count(todos[key])
     return jsonify(todos)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port='5000')
