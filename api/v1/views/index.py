@@ -14,6 +14,12 @@ def status():
     return jsonify({"status": "OK"})
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    '''return render_template'''
+    return jsonify(error='Not found'), 404
+    
+
 @app_views.route('/stats', strict_slashes=False)
 def some_stats():
     """Cuenta todas las clases por tipo."""
