@@ -7,7 +7,6 @@ from models.city import City
 from models.state import State
 from api.v1.views import app_views
 
-
 app = Flask(__name__)
 
 
@@ -25,7 +24,7 @@ def get_cities_by_states(state_id):
     cities = [city.to_dict() for city in state.cities]
 
      # Devolver las ciudades como JSON
-     return jsonify(cities)
+    return jsonify(cities)
 
 
 @app_views_route('/api/v1/cities/<city_id>', methods=['GET'],
@@ -37,7 +36,7 @@ def get_city():
     if city:
 
     # Convertir el objeto City devolviendolas en json
-        return jsonify([city.to_dict())
+        return jsonify(city.to_dict())
     else:
         # Si el objeto City no existe, generar un error 404
         abort(404)
