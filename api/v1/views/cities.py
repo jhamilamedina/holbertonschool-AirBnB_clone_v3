@@ -7,10 +7,11 @@ from models.city import City
 from models.state import State
 from api.v1.views import app_views
 
+
 app = Flask(__name__)
 
 
-@app.route('/api/v1/states//<state_id>/cities', methods=['GET'],
+@app_views_route('/api/v1/states//<state_id>/cities', methods=['GET'],
            strict_slashes=False)
 def get_cities_by_states(state_id):
     # Obtener el objeto del estado
@@ -23,11 +24,7 @@ def get_cities_by_states(state_id):
     # Obtener lista de cities del state devolviendolas en json
     cities = [city.to_dict() for city in state.cities]
 
-<<<<<<< HEAD
-     # Devolver las ciudades como JSON
-=======
     # Devolver las ciudades como JSON
->>>>>>> cbf6111e91ae74ce415f60de768d3e0d49c12771
     return jsonify(cities)
 
 
@@ -41,12 +38,7 @@ def get_city():
         abort(404)
 
     # Convertir el objeto City devolviendolas en json
-<<<<<<< HEAD
-        return jsonify(city.to_dict())
-    else:
-        # Si el objeto City no existe, generar un error 404
-=======
-    return jsonify(city.to_dict())
+    return jsonify(cities.to_dict())
 
 
 @app_views_route('/api/v1/cities/<city_id>', methods=['DELETE'],
@@ -57,7 +49,6 @@ def delete_city(city_id):
 
     # Verificar si el objeto City existe
     if not city:
->>>>>>> cbf6111e91ae74ce415f60de768d3e0d49c12771
         abort(404)
     # Eliminar el objeto City
     storage.delete(city)
