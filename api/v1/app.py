@@ -1,18 +1,20 @@
 #!/usr/bin/python3
-"""Nuestra app principal"""
+"""Servidor Flask
+"""
 
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
-from api.v1.views import app_views
 from os import getenv
+from api.v1.views import app_view
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def close_session(close):
-    """Cierra sesión"""
+def downtear(close):
+    '''Status of your API'''
     storage.close()
 
 
@@ -20,9 +22,13 @@ def close_session(close):
 def page_not_found(error):
     '''return render_template'''
     return jsonify(error='Not found'), 404
-    
 
-if __name__ == '__main__':
-    host = getenv('HBNB_API_HOST', '0.0.0.0')
-    port = getenv('HBNB_API_PORT', '5000')
-    app.run(host=host, port=port, threaded=True)
+
+if __name__ == "__main__":
+    host = getenv('HBNB_API_HOST')
+    port = getenv('HBNB_API_PORT')
+    if not host:
+        host = '0.0.0.0'
+    if not port:
+        port = '5000'
+    app.run(host='0.0.0.0', port='5000')
