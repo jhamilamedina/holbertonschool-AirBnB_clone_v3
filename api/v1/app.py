@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Flask server
+"""Servidor Flask
 """
 
 from flask import Flask, jsonify
@@ -31,4 +31,4 @@ if __name__ == "__main__":
         host = '0.0.0.0'
     if not port:
         port = '5000'
-    app.run(host=host, port=port, threaded=True)
+    app.run(host='0.0.0.0', port='5000')
