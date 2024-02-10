@@ -1,31 +1,22 @@
-#!/usr/bin/python3xx
-'''api status'''
+#!/usr/bin/python3
+"""Nuestra primera respuesta"""
 
-import models
-from models import storage
-from models.base_model import BaseModel
 from flask import jsonify
 from api.v1.views import app_views
-from models.state import State
-from models.user import User
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
+from console import classes
+from models import storage
+from models.base_model import BaseModel
 
 
 @app_views.route('/status', strict_slashes=False)
-def returnstuff():
-    '''return stuff'''
-    return jsonify(status='OK')
+def status():
+    """Nuestra primera salida exitosa con un JSON"""
+    return jsonify({"status": "OK"})
 
 
 @app_views.route('/stats', strict_slashes=False)
-def stuff():
-    '''JSON Responses'''
-    todos = {'states': State, 'users': User,
-            'amenities': Amenity, 'cities': City,
-            'places': Place, 'reviews': Review}
-    for key in todos:
-        todos[key] = storage.count(todos[key])
-    return jsonify(todos)
+def some_stats():
+    """Cuenta todas las clases por tipo."""
+    stats_class = {k: storage.count(
+        v) for k, v in classes.items() if v != BaseModel}
+    return jsonify(stats_class)
