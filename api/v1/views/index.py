@@ -17,6 +17,9 @@ def status():
 @app_views.route('/stats', strict_slashes=False)
 def some_stats():
     """Cuenta todas las clases por tipo."""
-    stats_class = {k: storage.count(
-        v) for k, v in classes.items() if v != BaseModel}
-    return jsonify(stats_class)
+    todos = {'states': State, 'users': User,
+            'amenities': Amenity, 'cities': City,
+            'places': Place, 'reviews': Review}
+    for key in todos:
+        todos[key] = storage.count(todos[key])
+    return jsonify(todos)
