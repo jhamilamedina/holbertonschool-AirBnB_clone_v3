@@ -20,3 +20,4 @@ def some_stats():
     stats_class = {k: storage.count(
         v) for k, v in classes.items() if v != BaseModel}
     return jsonify(stats_class)
+    
