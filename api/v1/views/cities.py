@@ -11,7 +11,7 @@ from api.v1.views import app_views
 app = Flask(__name__)
 
 
-@app.route('/api/v1/states//<state_id>/cities', methods=['GET'],
+@app_views_route('/api/v1/states//<state_id>/cities', methods=['GET'],
            strict_slashes=False)
 def get_cities_by_states(state_id):
     # Obtener el objeto del estado
@@ -38,7 +38,7 @@ def get_city():
         abort(404)
 
     # Convertir el objeto City devolviendolas en json
-    return jsonify(city.to_dict())
+    return jsonify(cities.to_dict())
 
 
 @app_views_route('/api/v1/cities/<city_id>', methods=['DELETE'],
