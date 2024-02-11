@@ -3,6 +3,7 @@
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
+import models
 from models.state import State
 from datetime import datetime
 import uuid
@@ -48,7 +49,7 @@ def create_state():
     if 'name' not in request.get_json():
         abort(400, 'Missing name')
     states = []
-    new_state = State(name=request.json['name'])
+    new_state = State(name=request.json["name"])
     storage.new(new_state)
     storage.save()
     states.append(new_state.to_dict())
