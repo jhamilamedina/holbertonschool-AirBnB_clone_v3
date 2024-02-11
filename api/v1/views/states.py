@@ -48,8 +48,11 @@ def create_state():
     kwargs = request.get_json()
     if 'name' not kwargs:
         abort(400, 'Missing name')
-    state = State(**kwargs) 
+    state = State(**kwargs)
+    new_state = State(name=request.json['name'])
+    storage.new(new_state)
     state.save()
+    states.append(new_state.to_dict())
     return jsonify(state.to_dict()), 201
 
 
