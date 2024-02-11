@@ -65,9 +65,9 @@ def updates_state(state_id):
         abort(404)
     if not request.get_json():
         abort(400, 'Not a JSON')
-    state_obj[0]['name'] = request.get_json['name']
+    state_obj[0]['name'] = request.json['name']
     for obj in all_states:
         if obj.id == state_id:
-            obj.name = request.get_json['name']
+            obj.name = request.json['name']
     storage.save()
     return jsonify(state_obj[0]), 200
