@@ -63,7 +63,7 @@ def updates_state(state_id):
     state_obj = [obj.to_dict() for obj in all_states if obj.id == state_id]
     if state_obj == []:
         abort(404)
-    if not request.json():
+    if not request.get_json():
         abort(400, 'Not a JSON')
     state_obj[0]['name'] = request.json['name']
     for obj in all_states:
