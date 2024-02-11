@@ -1,12 +1,15 @@
 #!/usr/bin/python3
-from flask import Flask
-from config import Config
-from flask_cors import CORS
-from api.v1.views.states import app_views as states_app_views
+"""create blueprint"""
+from flask import Blueprint
 
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
-    CORS(app)
-    app.register_blueprint(states_app_views)
-    return app
+app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+
+if app_views is not None:
+    from api.v1.views.index import *
+    from api.v1.views.states import *
+    from api.v1.views.cities import *
+    from api.v1.views.amenities import *
+    from api.v1.views.users import *
+    from api.v1.views.places import *
+    from api.v1.views.places_reviews import *
+    from api.v1.views.places_amenities import *
