@@ -50,7 +50,7 @@ def create_amenity():
     if 'name' not in request.get_json():
         abort(400, 'Missing name')
     amenities = []
-    new_amenity = Amenity(name=request.json['name'])
+    new_amenity = Amenity(name=request.get_json['name'])
     storage.new(new_amenity)
     storage.save()
     amenities.append(new_amenity.to_dict())
