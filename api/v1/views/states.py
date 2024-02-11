@@ -45,14 +45,12 @@ def create_state():
     '''Creates a State'''
     if not request.get_json():
         abort(400, 'Not a JSON')
-    if 'name' not in request.get_json():
+    kwargs = request.get_json()
+    if 'name' not kwargs:
         abort(400, 'Missing name')
-    states = []
-    new_state = State(name=request.json['name'])
-    storage.new(new_state)
-    storage.save()
-    states.append(new_state.to_dict())
-    return jsonify(states[0]), 201
+    state = State(**kwargs) 
+    state.save()
+    return jsonify(state.to_dict()), 201
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'])
