@@ -8,7 +8,7 @@ from datetime import datetime
 import uuid
 
 
-@app_views.route('/api/v1/states', methods=['GET'])
+@app_views.route('/states/', methods=['GET'])
 def list_states():
     '''Retrieves a list of all State objects'''
     list_states = [obj.to_dict() for obj in storage.all("State").values()]
@@ -40,7 +40,7 @@ def delete_state(state_id):
     return jsonify({}), 200
 
 
-@app_views.route('/api/v1/states', methods=['POST'])
+@app_views.route('/states/', methods=['POST'])
 def create_state():
     '''Creates a State'''
     data = request.get_json()
