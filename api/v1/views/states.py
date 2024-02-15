@@ -56,7 +56,7 @@ def create_state():
     return jsonify(states[0]), 201
 
 
-@app_views.route('/api/v1/states/<state_id>', methods=['PUT'])
+@app_views.route('/states/<state_id>', methods=['PUT'])
 def updates_state(state_id):
     '''Updates a State object'''
     all_states = storage.all("State").values()
