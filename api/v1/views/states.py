@@ -44,13 +44,11 @@ def delete_state(state_id):
                  strict_slashes=False)
 def create_state():
     '''Creates a State'''
-    Try:
-        data = request.get_json()
-    except Exception as e:
-        if not data:
-            abort(400, 'Not a JSON')
-        if 'name' not in data:
-            abort(400, 'Missing name')
+    data = request.get_json()
+    if not data:
+        abort(400, 'Not a JSON')
+    if 'name' not in data:
+        abort(400, 'Missing name')
     states = []
     new_state = State(name=data['name'])
     storage.new(new_state)
