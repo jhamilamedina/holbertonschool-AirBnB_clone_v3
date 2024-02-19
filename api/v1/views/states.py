@@ -44,7 +44,11 @@ def delete_state(state_id):
                  strict_slashes=False)
 def create_state():
     '''Creates a State'''
-    data = request.get_json()
+    Try:
+        data = request.get_json()
+    except Exception as e:
+        abort(400, "Invalid JSON data")
+
     if not data:
         abort(400, 'Not a JSON')
     if 'name' not in data:
