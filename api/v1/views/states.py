@@ -47,12 +47,10 @@ def create_state():
     Try:
         data = request.get_json()
     except Exception as e:
-        abort(400, "Invalid JSON data")
-
-    if not data:
-        abort(400, 'Not a JSON')
-    if 'name' not in data:
-        abort(400, 'Missing name')
+        if not data:
+            abort(400, 'Not a JSON')
+        if 'name' not in data:
+            abort(400, 'Missing name')
     states = []
     new_state = State(name=data['name'])
     storage.new(new_state)
